@@ -7,23 +7,36 @@
 
          <div class="twelve columns">
 
-            <ul class="footer-nav">
+<?php wp_nav_menu( array(
+'theme_location' => 'bottom', // вывести меню по индефикатору
+'container' => null,        // удалить обвертку меню
+'menu_id'         => 'footer-nav',
+'menu_class' => 'footer-nav'       // класс привязанный к nav ul
+)); ?>
+<!--             <ul class="footer-nav">
 					<li><a href="#">Home.</a></li>
               	<li><a href="#">Blog.</a></li>
               	<li><a href="#">Portfolio.</a></li>
               	<li><a href="#">About.</a></li>
               	<li><a href="#">Contact.</a></li>
                <li><a href="#">Features.</a></li>
-			   </ul>
+			   </ul> -->
 
-            <ul class="footer-social">
+<?php wp_nav_menu( array(
+'theme_location' => 'social', // вывести меню по индефикатору
+'container' => null,        // удалить обвертку меню
+'menu_class' => 'footer-social',        // класс привязанный к nav ul
+'menu_id' => 'footer-social'
+)); ?>
+
+<!--             <ul class="footer-social">
                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                <li><a href="#"><i class="fa fa-skype"></i></a></li>
                <li><a href="#"><i class="fa fa-rss"></i></a></li>
-            </ul>
+</ul> -->
 
             <ul class="copyright">
                <li>Copyright &copy; 2014 Sparrow</li>

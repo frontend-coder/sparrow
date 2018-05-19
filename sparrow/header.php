@@ -46,7 +46,7 @@
          <div class="twelve columns">
 
             <div class="logo">
-               <a href="index.html"><img alt="" src="images/logo.png"></a>
+               <a href="index.html"><img alt="" src="<?php bloginfo('template_url'); ?>/images/logo.png"></a>
             </div>
 
 
