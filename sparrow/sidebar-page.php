@@ -12,10 +12,6 @@
      </form>
    </div>
  -->
-
-
-
-
 <!--                <div class="widget widget_text">
                   <h5 class="widget-title">Text Widget</h5>
                   <div class="textwidget">Proin gravida nibh vel velit auctor aliquet.

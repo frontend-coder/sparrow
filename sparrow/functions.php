@@ -28,7 +28,27 @@ wp_enqueue_script( 'modernizrjs' );
 add_action('after_setup_theme', 'theme_top_nav_menu');
 function theme_top_nav_menu() {
 register_nav_menu( 'top', 'Верхнее меню в шапке' );
+add_theme_support( 'title-tag' ); //вывод title страниц
+add_theme_support( 'post-thumbnails', array( 'post' ) );
+//зарегить добавление миниатюр в постах
+add_theme_support( 'post-thumbnails', array( 'page' ) );
+//зарегить добавление миниатюр в страницах
+add_image_size('post_thumb', 1300, 500, true);
+// регю свой размер миниатюр для поста, размеры и жесткая обрезка
+
 }
+//the_excerpt установка ссылки по выбору заказчика
+add_filter('excerpt_more', 'new_excerpt_more');
+function new_excerpt_more($more) {
+	global $post;
+	return '<br/><a href="'. get_permalink($post->ID) . '">Читать дальше......</a>';
+}
+//the_excerpt обрезка до 20 слов + вывод ссылки читать далее
+function new_excerpt_length($length) {
+	return 20;
+}
+add_filter('excerpt_length', 'new_excerpt_length');
+
 
 // регистрация меню в подвале сайта
 add_action('after_setup_theme', 'theme_footer_nav_menu');
