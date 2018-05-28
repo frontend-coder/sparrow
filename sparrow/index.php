@@ -248,6 +248,7 @@ foreach($posts as $post){ setup_postdata($post);
                </div>
                <div class="ten columns entry-title pull-right">
                   <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                 <?php do_action('oleg_myaction'); ?>
                </div>
                <div class="two columns post-meta end">
                   <p>

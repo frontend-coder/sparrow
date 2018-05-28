@@ -873,7 +873,10 @@ ul#nav ul li a {
   margin-top: 18px;
   font-family: notosans-regular, sans-serif;
 }
-.post .post-content .tags a { font-family: notosans-bold, sans-serif; }
+.post .post-content .tags a {
+ font-family: notosans-bold, sans-serif;
+    color: #AFB4BB;
+ }
 
 /* bio */
 .post .bio {

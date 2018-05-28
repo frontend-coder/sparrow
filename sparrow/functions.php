@@ -29,12 +29,13 @@ add_action('after_setup_theme', 'theme_top_nav_menu');
 function theme_top_nav_menu() {
 register_nav_menu( 'top', 'Верхнее меню в шапке' );
 add_theme_support( 'title-tag' ); //вывод title страниц
-add_theme_support( 'post-thumbnails', array( 'post' ) );
-//зарегить добавление миниатюр в постах
+add_theme_support( 'post-thumbnails', array( 'post', 'portfolio' ) );
+//зарегить добавление миниатюр в постах и в своем типе записи - портфолио, которое я создал ниже
 add_theme_support( 'post-thumbnails', array( 'page' ) );
 //зарегить добавление миниатюр в страницах
 add_image_size('post_thumb', 1300, 500, true);
 // регю свой размер миниатюр для поста, размеры и жесткая обрезка
+add_theme_support( 'post-formats', array( 'aside', 'video', 'gallery', 'link' ) );
 
 }
 //the_excerpt установка ссылки по выбору заказчика
@@ -120,6 +121,105 @@ function register_single_widgets(){
  'after_title'   => "</h5>\n"
 	) );
 }
+
+
+
+// создать свой экшен - действие
+add_action('oleg_myaction', 'action_function');
+function action_function() {
+echo 'Я написал все это расскошное и преломленное создание';
+}
+// создать свой шорт- код
+add_shortcode('oleg_shortcode', 'short_function');
+function short_function() {
+return 'Я создал свой короткий код для вставки в блог через редактор кода';
+}
+
+// регистрация своих типов записи
+add_action('init', 'register_post_types');
+function register_post_types(){
+	register_post_type('portfolio', array(
+		'label'  => null,
+		'labels' => array(
+			'name'               => 'Портфолио', // основное название для типа записи
+			'singular_name'      => 'Портфолио', // название для одной записи этого типа
+			'add_new'            => 'Добавить работы в портфолио', // для добавления новой записи
+			'add_new_item'       => 'Добавление работы в портфолио', // заголовка у вновь создаваемой записи в админ-панели.
+			'edit_item'          => 'Редактирование работы портфолио', // для редактирования типа записи
+			'new_item'           => 'Новая работа в портфолио', // текст новой записи
+			'view_item'          => 'Смотреть работы в портфолио', // для просмотра записи этого типа.
+			'search_items'       => 'Искать работу в портфолио', // для поиска по этим типам записи
+			'not_found'          => 'Не найдено', // если в результате поиска ничего не было найдено
+			'not_found_in_trash' => 'Не найдено в корзине', // если не было найдено в корзине
+			'parent_item_colon'  => '', // для родителей (у древовидных типов)
+			'menu_name'          => 'Портфолио', // название меню
+		),
+		'description'         => 'Этот размещаем наши работы в портфолио',
+		'public'              => true,
+		'publicly_queryable'  => true, // зависит от public
+		'exclude_from_search' => false, // зависит от public чтобы выводились посты при клике по названию таксономии
+		'show_ui'             => true, // зависит от public
+		'show_in_menu'        => true, // показывать ли в меню адмнки
+		'show_in_admin_bar'   => true, // по умолчанию значение show_in_menu
+		'show_in_nav_menus'   => true, // зависит от public
+		'show_in_rest'        => true, // добавить в REST API. C WP 4.7
+		'rest_base'           => null, // $post_type. C WP 4.7
+		'menu_position'       => 2,
+		'menu_icon'           => 'dashicons-format-gallery',
+		//'capability_type'   => 'post',
+		//'capabilities'      => 'post', // массив дополнительных прав для этого типа записи
+		//'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
+		'hierarchical'        => false,
+		'supports'            => array('title','editor','author','thumbnail','excerpt'), // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+		'taxonomies'          => array('skills'),
+		'has_archive'         => false,
+		'rewrite'             => true,
+		'query_var'           => true,
+	) );
+}
+// конец регистрация своих типов записи
+// роегистрация наксономий
+
+// хук для регистрации таксономии
+add_action('init', 'create_taxonomy');
+function create_taxonomy(){
+	// список параметров: http://wp-kama.ru/function/get_taxonomy_labels
+	register_taxonomy('skills', array('portfolio'), array(
+		'label'                 => '', // определяется параметром $labels->name
+		'labels'                => array(
+			'name'              => 'Навыки',
+			'singular_name'     => 'Навык',
+			'search_items'      => 'Найти таксономию Навыки',
+			'all_items'         => 'Все таксономии Навыки',
+			'view_item '        => 'Просмотреть таксономии Навыки',
+			'parent_item'       => 'Pодительский навык',
+			'parent_item_colon' => 'Pодительский навык:',
+			'edit_item'         => 'Редактировать таксономии Навыки',
+			'update_item'       => 'Обновить',
+			'add_new_item'      => 'Добавить новую таксономию',
+			'new_item_name'     => 'Новое имя таксономии',
+			'menu_name'         => 'Навыки',
+		),
+		'description'           => 'Навыки, используемые в работе', // описание таксономии
+		'public'                => true,
+		'publicly_queryable'    => true, // равен аргументу public
+	'hierarchical'          => false,
+	'rewrite'               => true,
+
+	) );
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
